@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { setupStore } from './redux';
+import { RotateLoader } from 'react-spinners';
+import { BrowserRouter } from 'react-router-dom';
+
+
+const store = setupStore();
+
+export const Loader = () => {
+  return (<div>
+    <div
+      style={{ width: '100%', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <RotateLoader color="#5FB5F3" size={70} speedMultiplier="2" />
+    </div>
+  </div>);
+};
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+root.render(<Provider store={store}>
+  <BrowserRouter>
+    <Suspense fallback={<Loader />}>
+      <App />
+    </Suspense>
+  </BrowserRouter>
+</Provider>);
