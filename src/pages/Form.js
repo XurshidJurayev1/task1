@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Form as AntForm, Select, Input as AntInput } from 'antd';
+import { Button, Form as AntForm, Select, Input as AntInput, InputNumber } from 'antd';
 
 const { Option } = Select;
 
@@ -34,7 +34,7 @@ const StyledForm = styled(AntForm)`
 const Label = styled.p`
   font-size: 16px;
   font-weight: 600;
-  margin: 10px 0 15px 0;
+  margin: 10px 0 10px 0;
 `;
 
 const StyledSelect = styled(Select)`
@@ -43,20 +43,43 @@ const StyledSelect = styled(Select)`
 `;
 const StyledOption = styled(Option);
 
-const StyledInput = styled(AntInput);
+const StyledNumber = styled(InputNumber)`
+  width: 200px;
+`;
+
+
+const BoxFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+
+
+  @media screen and (max-width: 778px) {
+    width: 100%;
+    flex-direction: column;
+    justify-content: left;
+  }
+`;
+
+const SubTitle = styled.h3`
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0 25px 0;
+`;
 
 
 const Form = () => {
   const [form] = AntForm.useForm();
 
-  const onSubmit = (values) => {
+  const onSubmit = async () => {
+    const values = await form.validateFields();
     console.log(values);
   };
 
   const layout = { labelCol: { span: 10 }, wrapperCol: { span: 10 } };
 
   return (<Main>
-    <StyledForm form={form} submit={onSubmit}>
+    <StyledForm form={form}>
       <AntForm.Item
         {...layout}
         name="category"
@@ -114,86 +137,155 @@ const Form = () => {
         <AntInput.TextArea />
       </AntForm.Item>
 
+      <Label>
+        Введите стоимость проекта от и до
+      </Label>
+      <BoxFlex>
 
-      <AntForm.Item
-        {...layout}
-        name="sumMin"
-        rules={[{
-          required: true, message: 'This is required',
-        }]}
-      >
-        <Label>
+        <AntForm.Item
+          name="sumMin"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            min: 10000, message: 'Value should not be less than 10 000 sum',
+          }]}
+        >
+          <StyledNumber />
+        </AntForm.Item>
 
-        </Label>
-      </AntForm.Item>
-      <AntForm.Item
-        {...layout}
-        name="sumMax"
-        rules={[{
-          required: true, message: 'This is required',
-        }]}
-      >
-        <Label>
+        <AntForm.Item
 
-        </Label>
-      </AntForm.Item>
-      <AntForm.Item
-        {...layout}
-        name="category"
-        rules={[{
-          required: true, message: 'This is required',
-        }]}
-      >
-        <Label>
+          name="sumMax"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            max: 12000000, message: 'Value should be less than 230 character',
+          }]}
+        >
+          <StyledNumber />
+        </AntForm.Item>
+      </BoxFlex>
+      <>
+        <SubTitle>
+          Предложение фрилансера
+        </SubTitle>
 
-        </Label>
-      </AntForm.Item>
-      <AntForm.Item
-        {...layout}
-        name="category"
-        rules={[{
-          required: true, message: 'This is required',
-        }]}
-      >
-        <Label>
 
-        </Label>
-      </AntForm.Item>
-      <AntForm.Item
-        {...layout}
-        name="category"
-        rules={[{
-          required: true, message: 'This is required',
-        }]}
-      >
-        <Label>
+        <AntForm.Item
+          {...layout}
+          name="offer1"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            max: 50, message: 'Value should be less than 230 character',
+          }, {
+            min: 2000, message: 'Value should not be less than 10 character',
+          }]}
+        >
+          <Label>
+            ВВЕДИТЕ СВОЕ ПРЕДЛОЖЕНИЕ
+          </Label>
+          <AntInput.TextArea />
+        </AntForm.Item>
 
-        </Label>
-      </AntForm.Item>
-      <AntForm.Item
-        {...layout}
-        name="category"
-        rules={[{
-          required: true, message: 'This is required',
-        }]}
-      >
-        <Label>
+        <AntForm.Item
+          {...layout}
+          name="offerSum1"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            max: 10000, message: 'Value should be less than 230 character',
+          }, {
+            min: 12000000, message: 'Value should not be less than 10 character',
+          }]}
+        >
+          <Label>
+            ВВЕДИТЕ СУММУ ЗА КОТОРУЮ ВОЗЬМЕТЕСЬ ЗА ПРОЕКТ
+          </Label>
+          <StyledNumber />
+        </AntForm.Item>
+      </>
 
-        </Label>
-      </AntForm.Item>
-      <AntForm.Item
-        {...layout}
-        name="category"
-        rules={[{
-          required: true, message: 'This is required',
-        }]}
-      >
-        <Label>
+      <>
+        <SubTitle>
+          Предложение фрилансера
+        </SubTitle>
+        <AntForm.Item
+          {...layout}
+          name="offer2"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            max: 50, message: 'Value should be less than 230 character',
+          }, {
+            min: 2000, message: 'Value should not be less than 10 character',
+          }]}
+        >
+          <Label>
+            ВВЕДИТЕ СВОЕ ПРЕДЛОЖЕНИЕ
+          </Label>
+          <AntInput.TextArea />
+        </AntForm.Item>
 
-        </Label>
-      </AntForm.Item>
+        <AntForm.Item
+          {...layout}
+          name="offerSum2"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            max: 10000, message: 'Value should be less than 230 character',
+          }, {
+            min: 12000000, message: 'Value should not be less than 10 character',
+          }]}
+        >
+          <Label>
+            ВВЕДИТЕ СУММУ ЗА КОТОРУЮ ВОЗЬМЕТЕСЬ ЗА ПРОЕКТ
+          </Label>
+          <StyledNumber />
+        </AntForm.Item>
+      </>
+
+      <>
+        <SubTitle>
+          Предложение фрилансера
+        </SubTitle>
+        <AntForm.Item
+          {...layout}
+          name="offer3"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            max: 50, message: 'Value should be less than 230 character',
+          }, {
+            min: 2000, message: 'Value should not be less than 10 character',
+          }]}
+        >
+          <Label>
+            ВВЕДИТЕ СВОЕ ПРЕДЛОЖЕНИЕ
+          </Label>
+          <AntInput.TextArea />
+        </AntForm.Item>
+
+        <AntForm.Item
+          {...layout}
+          name="offerSum4"
+          rules={[{
+            required: true, message: 'This is required',
+          }, {
+            max: 10000, message: 'Value should be less than 230 character',
+          }, {
+            min: 12000000, message: 'Value should not be less than 10 character',
+          }]}
+        >
+          <Label>
+            ВВЕДИТЕ СУММУ ЗА КОТОРУЮ ВОЗЬМЕТЕСЬ ЗА ПРОЕКТ
+          </Label>
+          <StyledNumber />
+        </AntForm.Item>
+      </>
+
       {/*<Button onClick={() => onSubmit} type="primary">Primary Button</Button>*/}
-      <button type="submit">Primary Button</button>
+      <button type="button" onClick={onSubmit}>Primary Button</button>
     </StyledForm>
   </Main>);
 };
