@@ -35,6 +35,9 @@ const Label = styled.p`
   font-size: 16px;
   font-weight: 600;
   margin: 10px 0 10px 0;
+  @media screen and (max-width: 778px) {
+    font-size: 12px;
+  }
 `;
 
 const StyledSelect = styled(Select)`
@@ -65,6 +68,9 @@ const SubTitle = styled.h3`
   font-size: 20px;
   font-weight: 600;
   margin: 20px 0 25px 0;
+  @media screen and (max-width: 778px) {
+    font-size: 16px;
+  }
 `;
 
 
