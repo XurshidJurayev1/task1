@@ -7,9 +7,9 @@ import styled from 'styled-components';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { favorites } = useAppSelector(state => state);
+  // const { favorites } = useAppSelector(state => state);
 
-  console.log(favorites);
+  // console.log(favorites);
   useEffect(() => {
     dispatch(test());
   }, []);
