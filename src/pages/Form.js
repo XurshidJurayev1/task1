@@ -150,7 +150,7 @@ const FormComponent = () => {
     api().post('myjobs/apidot/adDetails', { data: submitData })
       .then(res => {
         console.log(res);
-        toast.success(res.message, {
+        toast.success(res.data.message, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
